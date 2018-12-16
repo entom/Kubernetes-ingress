@@ -1,0 +1,14 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: zoneprinter
+  annotations:
+    kubernetes.io/ingress.class: gce-multi-cluster
+    kubernetes.io/ingress.global-static-ip-name: $ZP_KUBEMCI_IP
+spec:
+  tls:
+  # This assumes tls-secret exists.
+  - secretName: tls-secret
+  backend:
+    serviceName: zoneprinter
+    servicePort: 80
